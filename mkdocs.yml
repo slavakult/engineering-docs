@@ -1,0 +1,73 @@
+site_name: SAS Documentation
+site_description: Демонстрационный проект технической документации
+site_url: https://slavakult.github.io/engineering-docs/
+
+theme:
+  name: material
+  logo: images/logo.png
+  language: ru
+
+  features:
+    - navigation.path
+    - navigation.footer
+    - toc.integrate
+    - content.code.copy
+    - content.code.select
+
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil-plus
+    view: material/eye
+
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: light blue
+      toggle:
+        icon: material/brightness-7
+        name: Тёмная тема
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: light blue
+      toggle:
+        icon: material/brightness-4
+        name: Светлая тема
+
+extra:
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+
+  - toc:
+      permalink: true
+      separator: "_"
+
+  - pymdownx.details
+
+  - pymdownx.tabbed:
+      alternate_style: true
+
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
