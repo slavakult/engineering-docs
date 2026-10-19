@@ -1,6 +1,36 @@
-site_name: SAS Documentation
+site_name: SAS Company
 site_description: Демонстрационный проект технической документации
 site_url: https://slavakult.github.io/engineering-docs/
+
+nav:
+  - Главная: index.md
+
+  - Начало работы:
+      - Обзор системы: getting-started/overview.md
+      - Архитектура: getting-started/architecture.md
+      - Быстрый старт: getting-started/quick-start.md
+      - Авторизация: getting-started/authorization.md
+
+  - Руководство пользователя:
+      - Обзор: user-guide/index.md
+      - Панель управления: user-guide/dashboard.md
+      - Склад: user-guide/warehouse.md
+      - Библиотека компонентов: user-guide/library.md
+      - Проекты: user-guide/projects.md
+      - Репозиторий: user-guide/repository.md
+      - Задачи: user-guide/tasks.md
+      - Доски: user-guide/boards.md
+      - Команда: user-guide/team.md
+
+  - API Reference: api-reference/index.md
+
+  - Справочник:
+      - Обзор: reference/index.md
+      - FAQ: reference/faq.md
+      - Глоссарий: reference/glossary.md
+      - Changelog: reference/changelog.md
+
+  - Проект: about/index.md
 
 theme:
   name: material
@@ -43,6 +73,8 @@ extra_css:
 
 plugins:
   - search
+  - swagger-ui-tag:
+      supportedSubmitMethods: []
 
 markdown_extensions:
   - admonition

@@ -14,11 +14,14 @@
 
 ### API
 
-- **[API Reference](../api-reference/index.md)** — справочная информация о программном интерфейсе системы.
-- **[Authentication](../api-reference/authentication.md)** — авторизация и получение доступа к API.
-- **[Warehouse API](../api-reference/warehouse.md)** — методы работы с элементной базой.
-- **[Projects API](../api-reference/projects.md)** — методы работы с проектами.
-- **[Tasks API](../api-reference/tasks.md)** — методы работы с задачами.
+[API Reference](../api-reference/index.md) — общая справочная информация о программном интерфейсе системы.
+
+В Swagger UI методы сгруппированы по тегам:
+
+- **Authentication** — авторизация и получение токена доступа. Методы: `login`, `logout`.
+- **Warehouse** — работа с элементной базой. Методы: `getComponents`, `createComponent`, `importComponentsCsv`, `importFromDigiKey`.
+- **Projects** — работа с проектами. Методы: `getProjects`, `createProject`, `getProject`, `updateProject`, `deleteProject`, `updateProjectStatus`.
+- **Tasks** — работа с задачами. Методы: `getTasks`, `createTask`, `getTask`.
 
 ## Как пользоваться справочником
 
@@ -32,4 +35,3 @@
 
 - [Быстрый старт](../getting-started/index.md)
 - [Руководство пользователя](../user-guide/index.md)
-- [API Reference](../api-reference/index.md)
