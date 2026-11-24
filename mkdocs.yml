@@ -15,9 +15,10 @@ nav:
       - Обзор: user-guide/index.md
       - Панель управления: user-guide/dashboard.md
       - Склад: user-guide/warehouse.md
-      - Библиотека компонентов: user-guide/library.md
+      - Библиотека: user-guide/library.md
+      - Дефицит: user-guide/deficit.md
       - Проекты: user-guide/projects.md
-      - Репозиторий: user-guide/repository.md
+      - Repo: user-guide/repository.md
       - Задачи: user-guide/tasks.md
       - Доски: user-guide/boards.md
       - Команда: user-guide/team.md

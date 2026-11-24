@@ -6,7 +6,7 @@ SasCom — это набор инструментов разработчика �
 
 ## С чего начать
 
-Если вы впервые работаете с системой, начните с раздела **Getting Started**:
+Если вы впервые работаете с системой, начните с раздела **Начало работы**:
 
 - [Обзор системы](getting-started/overview.md) — назначение и основные возможности системы.
 - [Архитектура](getting-started/architecture.md) — общее представление о структуре системы.
@@ -17,21 +17,21 @@ SasCom — это набор инструментов разработчика �
 
 <div class="grid cards" markdown>
 
--   :material-account-outline: **User Guide**
+-   :material-account-outline: **Руководство пользователя**
 
     ---
 
     Руководство пользователя по работе с основными разделами системы.
 
-    [:octicons-arrow-right-24: Перейти к User Guide](user-guide/index.md)
+    [:octicons-arrow-right-24: Перейти к руководству](user-guide/index.md)
 
--   :material-rocket-launch-outline: **Getting Started**
+-   :material-rocket-launch-outline: **Начало работы**
 
     ---
 
     Обзор системы, архитектура, авторизация и быстрый старт.
 
-    [:octicons-arrow-right-24: Перейти к Getting Started](getting-started/overview.md)
+    [:octicons-arrow-right-24: Перейти к началу работы](getting-started/overview.md)
 
 -   :material-api: **API Reference**
 
@@ -41,13 +41,13 @@ SasCom — это набор инструментов разработчика �
 
     [:octicons-arrow-right-24: Перейти к API Reference](api-reference/index.md)
 
--   :material-book-open-variant: **Reference**
+-   :material-book-open-variant: **Справочник**
 
     ---
 
     FAQ, глоссарий и история изменений системы.
 
-    [:octicons-arrow-right-24: Перейти к Reference](reference/index.md)
+    [:octicons-arrow-right-24: Перейти к справочнику](reference/index.md)
 
 </div>
 
@@ -55,13 +55,14 @@ SasCom — это набор инструментов разработчика �
 
 | Раздел | Описание |
 |---|---|
-| [Warehouse](user-guide/warehouse.md) | Работа с компонентами и данными склада |
-| [Library](user-guide/library.md) | Работа с файлами и библиотекой |
-| [Projects](user-guide/projects.md) | Работа с проектами и их рабочими пространствами |
-| [Tasks](user-guide/tasks.md) | Создание и управление задачами |
-| [Repository](user-guide/repository.md) | Работа с репозиториями |
-| [Boards](user-guide/boards.md) | Работа с досками |
-| [Team](user-guide/team.md) | Работа с командой |
+| [Склад](user-guide/warehouse.md) | Работа с компонентами и данными склада |
+| [Библиотека](user-guide/library.md) | Работа с файлами и библиотекой |
+| [Дефицит](user-guide/deficit.md) | Просмотр отчёта о недостающих компонентах |
+| [Проекты](user-guide/projects.md) | Работа с проектами и их рабочими пространствами |
+| [Задачи](user-guide/tasks.md) | Создание и управление задачами |
+| [Репозиторий](user-guide/repository.md) | Работа с репозиториями |
+| [Доски](user-guide/boards.md) | Работа с досками |
+| [Команда](user-guide/team.md) | Работа с командой |
 
 !!! note "Примечание"
 
