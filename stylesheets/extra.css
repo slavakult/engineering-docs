@@ -1,0 +1,143 @@
+/* ==========================================================
+   Дополнительные стили сайта
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   Скрытие изображений для противоположной темы
+   ---------------------------------------------------------- */
+
+[data-md-color-scheme="default"] img[src$="#only-dark"] {
+    display: none;
+}
+
+[data-md-color-scheme="slate"] img[src$="#only-light"] {
+    display: none;
+}
+
+
+/* ----------------------------------------------------------
+   Режим чтения
+   ---------------------------------------------------------- */
+
+/* Основной контейнер документа */
+body.reading-mode .md-main__inner {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Увеличиваем ширину области с текстом */
+body.reading-mode .md-content {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Контейнер контента */
+body.reading-mode .md-content__inner {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Увеличиваем шрифт основного текста */
+body.reading-mode .md-typeset {
+    font-size: 0.9rem;
+    line-height: 1.75;
+}
+
+/* Параграфы */
+body.reading-mode .md-typeset p {
+    line-height: 1.75;
+}
+
+/* Списки */
+body.reading-mode .md-typeset li {
+    line-height: 1.7;
+}
+
+/* Заголовки */
+body.reading-mode .md-typeset h1 {
+    font-size: 2rem;
+}
+
+body.reading-mode .md-typeset h2 {
+    font-size: 1.6rem;
+}
+
+body.reading-mode .md-typeset h3 {
+    font-size: 1.3rem;
+}
+
+/* Таблицы */
+body.reading-mode .md-typeset table {
+    font-size: 0.85rem;
+}
+
+/* Код */
+body.reading-mode .md-typeset code {
+    font-size: 0.85em;
+}
+
+/* Блоки кода */
+body.reading-mode .md-typeset pre {
+    font-size: 0.8rem;
+}
+
+/* Изображения */
+body.reading-mode .md-typeset img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* ----------------------------------------------------------
+   Адаптация для мобильных устройств
+   ---------------------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+
+    body.reading-mode .md-main__inner {
+        max-width: 100%;
+    }
+
+    body.reading-mode .md-content,
+    body.reading-mode .md-content__inner {
+        max-width: 100%;
+    }
+
+    body.reading-mode .md-typeset {
+        font-size: 0.85rem;
+        line-height: 1.65;
+    }
+
+    body.reading-mode .md-typeset h1 {
+        font-size: 1.7rem;
+    }
+
+    body.reading-mode .md-typeset h2 {
+        font-size: 1.4rem;
+    }
+
+    body.reading-mode .md-typeset h3 {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* ----------------------------------------------------------
+   Расширяем общий контейнер в режиме чтения
+   ---------------------------------------------------------- */
+
+body.reading-mode .md-grid {
+    max-width: 1440px;
+}
+
+body.reading-mode .md-main {
+    width: 100%;
+}
+
+body.reading-mode .md-main__inner {
+    width: 100%;
+}

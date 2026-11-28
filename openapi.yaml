@@ -1,0 +1,995 @@
+openapi: 3.0.3
+
+info:
+  title: SASCOM API
+  version: 1.0.0
+  description: |
+    Программный интерфейс SASCOM для взаимодействия с основными
+    функциональными модулями системы.
+
+servers:
+  - url: https://sascom.ddns.net/api/v1
+    description: SASCOM API
+
+tags:
+  - name: Authentication
+    description: Аутентификация пользователей и управление сессиями.
+  - name: Warehouse
+    description: Работа с элементной базой и связанными инженерными данными.
+  - name: Projects
+    description: Управление проектами и связанными инженерными данными.
+  - name: Tasks
+    description: Управление задачами и их представлениями.
+
+security:
+  - bearerAuth: []
+
+paths:
+
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Инициализация входа
+      operationId: login
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Аутентификация выполнена успешно.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Некорректные данные запроса.
+        '401':
+          description: Неверный идентификатор или код доступа.
+        '429':
+          description: Превышено количество попыток аутентификации.
+        '500':
+          description: Внутренняя ошибка сервера.
+
+  /auth/logout:
+    post:
+      tags:
+        - Authentication
+      summary: Завершение сессии
+      operationId: logout
+      responses:
+        '204':
+          description: Сессия завершена.
+        '401':
+          description: Требуется действующий токен.
+
+  /warehouse/components:
+    get:
+      tags:
+        - Warehouse
+      summary: Получение списка компонентов
+      operationId: getComponents
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+        - in: query
+          name: manufacturer
+          schema:
+            type: string
+          description: Фильтр по производителю.
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Фильтр по категории.
+        - in: query
+          name: low_stock_only
+          schema:
+            type: boolean
+            default: false
+          description: Вернуть только компоненты с низким остатком.
+      responses:
+        '200':
+          description: Список компонентов.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentList'
+        '401':
+          description: Требуется авторизация.
+
+    post:
+      tags:
+        - Warehouse
+      summary: Создание компонента
+      operationId: createComponent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComponentCreate'
+      responses:
+        '201':
+          description: Компонент создан.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+        '400':
+          description: Некорректные данные.
+        '401':
+          description: Требуется авторизация.
+
+  /warehouse/components/{component_id}:
+    parameters:
+      - $ref: '#/components/parameters/ComponentId'
+
+    get:
+      tags:
+        - Warehouse
+      summary: Получение компонента
+      operationId: getComponent
+      responses:
+        '200':
+          description: Компонент.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Компонент не найден.
+
+    put:
+      tags:
+        - Warehouse
+      summary: Обновление компонента
+      operationId: updateComponent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComponentUpdate'
+      responses:
+        '200':
+          description: Компонент обновлён.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+        '400':
+          description: Некорректные данные.
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Компонент не найден.
+
+    delete:
+      tags:
+        - Warehouse
+      summary: Удаление компонента
+      operationId: deleteComponent
+      responses:
+        '204':
+          description: Компонент удалён.
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Компонент не найден.
+
+  /warehouse/components/{component_id}/datasheet:
+    parameters:
+      - $ref: '#/components/parameters/ComponentId'
+    get:
+      tags:
+        - Warehouse
+      summary: Получение datasheet компонента
+      operationId: getComponentDatasheet
+      responses:
+        '200':
+          description: Файл datasheet.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Datasheet не найден.
+
+    post:
+      tags:
+        - Warehouse
+      summary: Загрузка datasheet
+      operationId: uploadComponentDatasheet
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Datasheet загружен.
+        '400':
+          description: Некорректный файл.
+        '401':
+          description: Требуется авторизация.
+
+  /warehouse/components/{component_id}/model-3d:
+    parameters:
+      - $ref: '#/components/parameters/ComponentId'
+    get:
+      tags:
+        - Warehouse
+      summary: Получение 3D-модели компонента
+      operationId: getComponent3dModel
+      responses:
+        '200':
+          description: Архив с 3D-моделью.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: 3D-модель не найдена.
+
+  /warehouse/import/csv:
+    post:
+      tags:
+        - Warehouse
+      summary: Импорт компонентов из CSV
+      operationId: importComponentsCsv
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Импорт выполнен.
+        '400':
+          description: Ошибка формата CSV.
+        '401':
+          description: Требуется авторизация.
+
+  /warehouse/import/digikey:
+    post:
+      tags:
+        - Warehouse
+      summary: Импорт компонента из Digi-Key
+      operationId: importFromDigiKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DigiKeyImportRequest'
+      responses:
+        '201':
+          description: Компонент импортирован.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+        '400':
+          description: Некорректный URL или данные.
+        '401':
+          description: Требуется авторизация.
+
+  /projects:
+    get:
+      tags:
+        - Projects
+      summary: Получение списка проектов
+      operationId: getProjects
+      responses:
+        '200':
+          description: Список проектов.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        '401':
+          description: Требуется авторизация.
+
+    post:
+      tags:
+        - Projects
+      summary: Создание проекта
+      operationId: createProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreate'
+      responses:
+        '201':
+          description: Проект создан.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Некорректные данные.
+        '401':
+          description: Требуется авторизация.
+
+  /projects/{project_id}:
+    parameters:
+      - $ref: '#/components/parameters/ProjectId'
+
+    get:
+      tags:
+        - Projects
+      summary: Получение проекта
+      operationId: getProject
+      responses:
+        '200':
+          description: Проект.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Проект не найден.
+
+    put:
+      tags:
+        - Projects
+      summary: Обновление проекта
+      operationId: updateProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUpdate'
+      responses:
+        '200':
+          description: Проект обновлён.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Проект не найден.
+
+    delete:
+      tags:
+        - Projects
+      summary: Удаление проекта
+      operationId: deleteProject
+      responses:
+        '204':
+          description: Проект удалён.
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Проект не найден.
+
+  /projects/{project_id}/status:
+    parameters:
+      - $ref: '#/components/parameters/ProjectId'
+    patch:
+      tags:
+        - Projects
+      summary: Изменение статуса проекта
+      operationId: updateProjectStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectStatusUpdate'
+      responses:
+        '200':
+          description: Статус изменён.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Недопустимый статус.
+        '401':
+          description: Требуется авторизация.
+
+  /projects/{project_id}/overview:
+    parameters:
+      - $ref: '#/components/parameters/ProjectId'
+    get:
+      tags:
+        - Projects
+      summary: Получение обзора проекта
+      operationId: getProjectOverview
+      responses:
+        '200':
+          description: Данные обзора проекта.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectOverview'
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Проект не найден.
+
+  /projects/{project_id}/components:
+    parameters:
+      - $ref: '#/components/parameters/ProjectId'
+    get:
+      tags:
+        - Projects
+      summary: Получение элементной базы проекта
+      operationId: getProjectComponents
+      responses:
+        '200':
+          description: Список компонентов проекта.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Component'
+        '401':
+          description: Требуется авторизация.
+
+  /projects/{project_id}/architecture/graph:
+    parameters:
+      - $ref: '#/components/parameters/ProjectId'
+    get:
+      tags:
+        - Projects
+      summary: Получение архитектурного графа
+      operationId: getArchitectureGraph
+      responses:
+        '200':
+          description: Архитектурный граф проекта.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureGraph'
+        '401':
+          description: Требуется авторизация.
+
+    put:
+      tags:
+        - Projects
+      summary: Обновление архитектурного графа
+      operationId: updateArchitectureGraph
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArchitectureGraph'
+      responses:
+        '200':
+          description: Граф обновлён.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureGraph'
+        '400':
+          description: Некорректная структура графа.
+        '401':
+          description: Требуется авторизация.
+
+  /projects/{project_id}/changelog:
+    parameters:
+      - $ref: '#/components/parameters/ProjectId'
+    get:
+      tags:
+        - Projects
+      summary: Получение журнала изменений проекта
+      operationId: getProjectChangelog
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum:
+              - file
+              - schematic
+              - architecture
+              - bom
+              - note
+          description: Тип изменения.
+      responses:
+        '200':
+          description: Журнал изменений.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLogEntry'
+        '401':
+          description: Требуется авторизация.
+
+  /tasks:
+    get:
+      tags:
+        - Tasks
+      summary: Получение списка задач
+      operationId: getTasks
+      parameters:
+        - in: query
+          name: project_id
+          schema:
+            type: string
+          description: Фильтр по проекту.
+        - in: query
+          name: assignee_id
+          schema:
+            type: string
+          description: Фильтр по исполнителю.
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum:
+              - todo
+              - in_progress
+              - review
+              - done
+          description: Фильтр по статусу.
+        - in: query
+          name: my_tasks_only
+          schema:
+            type: boolean
+            default: false
+          description: Вернуть только задачи текущего пользователя.
+        - in: query
+          name: view
+          schema:
+            type: string
+            enum:
+              - board
+              - list
+            default: board
+          description: Представление задач.
+      responses:
+        '200':
+          description: Список задач.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskList'
+        '401':
+          description: Требуется авторизация.
+
+    post:
+      tags:
+        - Tasks
+      summary: Создание задачи
+      operationId: createTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreate'
+      responses:
+        '201':
+          description: Задача создана.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Некорректные данные.
+        '401':
+          description: Требуется авторизация.
+
+  /tasks/{task_id}:
+    parameters:
+      - $ref: '#/components/parameters/TaskId'
+
+    get:
+      tags:
+        - Tasks
+      summary: Получение задачи
+      operationId: getTask
+      responses:
+        '200':
+          description: Задача.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Задача не найдена.
+
+    put:
+      tags:
+        - Tasks
+      summary: Обновление задачи
+      operationId: updateTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskUpdate'
+      responses:
+        '200':
+          description: Задача обновлена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Некорректные данные.
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Задача не найдена.
+
+    delete:
+      tags:
+        - Tasks
+      summary: Удаление задачи
+      operationId: deleteTask
+      responses:
+        '204':
+          description: Задача удалена.
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Задача не найдена.
+
+  /tasks/{task_id}/status:
+    parameters:
+      - $ref: '#/components/parameters/TaskId'
+    patch:
+      tags:
+        - Tasks
+      summary: Изменение статуса задачи
+      operationId: updateTaskStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskStatusUpdate'
+      responses:
+        '200':
+          description: Статус изменён.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Недопустимый статус.
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Задача не найдена.
+
+components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      description: Номер страницы.
+
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 50
+      description: Количество элементов на странице.
+
+    ComponentId:
+      name: component_id
+      in: path
+      required: true
+      schema:
+        type: string
+
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      schema:
+        type: string
+
+    TaskId:
+      name: task_id
+      in: path
+      required: true
+      schema:
+        type: string
+
+  schemas:
+
+    LoginRequest:
+      type: object
+      required:
+        - login
+        - password
+      properties:
+        login:
+          type: string
+          description: Идентификатор (логин) пользователя.
+          example: engineer
+        password:
+          type: string
+          format: password
+          description: Код доступа (пароль).
+          example: engineer
+
+    LoginResponse:
+      type: object
+      required:
+        - access_token
+        - token_type
+        - expires_in
+      properties:
+        access_token:
+          type: string
+          description: Токен доступа.
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          description: Срок действия токена в секундах.
+          example: 3600
+
+    ComponentCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        manufacturer:
+          type: string
+        mpn:
+          type: string
+        category:
+          type: string
+
+    ComponentUpdate:
+      allOf:
+        - $ref: '#/components/schemas/ComponentCreate'
+
+    Component:
+      allOf:
+        - $ref: '#/components/schemas/ComponentCreate'
+        - type: object
+          properties:
+            id:
+              type: string
+            quantity:
+              type: integer
+              minimum: 0
+
+    ComponentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+
+    DigiKeyImportRequest:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+
+    ProjectCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+
+    ProjectUpdate:
+      allOf:
+        - $ref: '#/components/schemas/ProjectCreate'
+
+    Project:
+      allOf:
+        - $ref: '#/components/schemas/ProjectCreate'
+        - type: object
+          properties:
+            id:
+              type: string
+            status:
+              type: string
+              enum:
+                - active
+                - paused
+                - completed
+                - archived
+
+    ProjectStatusUpdate:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - active
+            - paused
+            - completed
+            - archived
+
+    ProjectOverview:
+      type: object
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+        components_count:
+          type: integer
+        files_count:
+          type: integer
+        architecture_available:
+          type: boolean
+
+    ArchitectureGraph:
+      type: object
+      properties:
+        nodes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              label:
+                type: string
+        edges:
+          type: array
+          items:
+            type: object
+            properties:
+              source:
+                type: string
+              target:
+                type: string
+
+    ChangeLogEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    TaskCreate:
+      type: object
+      required:
+        - title
+        - project_id
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        project_id:
+          type: string
+        assignee_id:
+          type: string
+        status:
+          type: string
+          enum:
+            - todo
+            - in_progress
+            - review
+            - done
+          default: todo
+
+    TaskUpdate:
+      allOf:
+        - $ref: '#/components/schemas/TaskCreate'
+
+    Task:
+      allOf:
+        - $ref: '#/components/schemas/TaskCreate'
+        - type: object
+          properties:
+            id:
+              type: string
+            priority:
+              type: string
+              enum:
+                - high
+                - medium
+                - low
+            created_at:
+              type: string
+              format: date-time
+
+    TaskList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        total:
+          type: integer
+
+    TaskStatusUpdate:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - todo
+            - in_progress
+            - review
+            - done

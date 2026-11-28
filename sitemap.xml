@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/about/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/about/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://slavakult.github.io/engineering-docs/en/about/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/api-reference/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/api-reference/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/getting-started/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/getting-started/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/getting-started/architecture/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/getting-started/architecture/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/getting-started/authorization/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/getting-started/authorization/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/getting-started/overview/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/getting-started/overview/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/getting-started/quick-start/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/getting-started/quick-start/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/reference/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/reference/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/reference/changelog/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/reference/changelog/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/reference/faq/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/reference/faq/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/reference/glossary/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/reference/glossary/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/user-guide/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/user-guide/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/user-guide/boards/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/user-guide/boards/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/user-guide/dashboard/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/user-guide/dashboard/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/user-guide/deficit/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/user-guide/deficit/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/user-guide/library/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/user-guide/library/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/user-guide/projects/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/user-guide/projects/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/user-guide/repository/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/user-guide/repository/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/user-guide/tasks/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/user-guide/tasks/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/user-guide/team/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/user-guide/team/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/user-guide/warehouse/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/user-guide/warehouse/"/>
+    </url>
+    <url>
+        <loc>https://slavakult.github.io/engineering-docs/en/about/</loc>
+        <lastmod>2026-11-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://slavakult.github.io/engineering-docs/en/about/"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://slavakult.github.io/engineering-docs/about/"/>
+    </url>
+</urlset>
