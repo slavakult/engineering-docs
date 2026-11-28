@@ -634,6 +634,72 @@ paths:
         '404':
           description: Задача не найдена.
 
+    put:
+      tags:
+        - Tasks
+      summary: Обновление задачи
+      operationId: updateTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskUpdate'
+      responses:
+        '200':
+          description: Задача обновлена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Некорректные данные.
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Задача не найдена.
+
+    delete:
+      tags:
+        - Tasks
+      summary: Удаление задачи
+      operationId: deleteTask
+      responses:
+        '204':
+          description: Задача удалена.
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Задача не найдена.
+
+  /tasks/{task_id}/status:
+    parameters:
+      - $ref: '#/components/parameters/TaskId'
+    patch:
+      tags:
+        - Tasks
+      summary: Изменение статуса задачи
+      operationId: updateTaskStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskStatusUpdate'
+      responses:
+        '200':
+          description: Статус изменён.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Недопустимый статус.
+        '401':
+          description: Требуется авторизация.
+        '404':
+          description: Задача не найдена.
+
 components:
 
   securitySchemes:
@@ -884,6 +950,10 @@ components:
             - done
           default: todo
 
+    TaskUpdate:
+      allOf:
+        - $ref: '#/components/schemas/TaskCreate'
+
     Task:
       allOf:
         - $ref: '#/components/schemas/TaskCreate'
@@ -910,3 +980,16 @@ components:
             $ref: '#/components/schemas/Task'
         total:
           type: integer
+
+    TaskStatusUpdate:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - todo
+            - in_progress
+            - review
+            - done

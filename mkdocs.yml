@@ -2,6 +2,11 @@ site_name: SAS Company
 site_description: Демонстрационный проект технической документации
 site_url: https://slavakult.github.io/engineering-docs/
 
+repo_url: https://github.com/slavakult/engineering-docs
+repo_name: SAS Company
+
+edit_uri: edit/main/docs/
+
 nav:
   - Главная: index.md
 
@@ -27,9 +32,9 @@ nav:
 
   - Справочник:
       - Обзор: reference/index.md
-      - FAQ: reference/faq.md
+      - Часто задаваемые вопросы: reference/faq.md
       - Глоссарий: reference/glossary.md
-      - Changelog: reference/changelog.md
+      - История изменений: reference/changelog.md
 
   - Проект: about/index.md
 
@@ -44,11 +49,12 @@ theme:
     - toc.integrate
     - content.code.copy
     - content.code.select
+    - content.action.view
 
   icon:
     repo: fontawesome/brands/github
     edit: material/pencil-plus
-    view: material/eye
+    view: material/file-code
 
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -58,6 +64,7 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Тёмная тема
+
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: indigo
@@ -72,10 +79,64 @@ extra:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/extra.js
+  
 plugins:
   - search
+
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: false
+      reconfigure_material: true
+      reconfigure_search: true
+
+      languages:
+        - locale: ru
+          name: Русский
+          default: true
+          build: true
+
+        - locale: en
+          name: English
+          build: true
+          nav_translations:
+            Главная: Home
+            Начало работы: Getting started
+            Обзор системы: System overview
+            Архитектура: Architecture
+            Быстрый старт: Quick start
+            Авторизация: Authorization
+            Руководство пользователя: User guide
+            Обзор: Overview
+            Панель управления: Dashboard
+            Склад: Warehouse
+            Библиотека: Library
+            Дефицит: Deficit
+            Проекты: Projects
+            Задачи: Tasks
+            Доски: Boards
+            Команда: Team
+            Часто задаваемые вопросы: FAQ
+            Глоссарий: Glossary
+            История изменений: Changelog
+            Проект: Project
+
   - swagger-ui-tag:
       supportedSubmitMethods: []
+
+  - zen-mode:
+      enabled: true
+      max_width: "900px"
+      shortcut: "Alt+Z"
+      button_position: header
+      hide_header: true
+      hide_footer: true
+      hide_tabs: true
+      hide_toc: true
+      hide_nav: true
+      hide_announce: true
+      transition_duration: "0.3s"
 
 markdown_extensions:
   - admonition
